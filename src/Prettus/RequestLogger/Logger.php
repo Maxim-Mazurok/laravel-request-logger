@@ -25,7 +25,7 @@ class Logger implements Log
 
         if( config('request-logger.logger.enabled') && $handlers = config('request-logger.logger.handlers') ) {
             if( count($handlers) ) {
-                //Remove default laravel handler
+                //Remove  default laravel handler
                 $this->monolog->popHandler();
 
                 foreach($handlers as $handler) {
