@@ -41,9 +41,9 @@ class ResponseLoggerMiddleware
     protected function excluded(Request $request) {
         $exclude = config('request-logger.exclude');
 
-        foreach($exclude as $path) {
+        /*foreach($exclude as $path) {
             if($request->is($path)) return true;
-        }
+        }*/
 
         return false;
     }
