@@ -31,6 +31,7 @@ class Logger implements Log
                 foreach($handlers as $handler) {
                     if( class_exists($handler) ) {
                         $this->monolog->pushHandler(app($handler));
+                        $this->monolog->pushProcessor(new Processors\MyProcessor());
                     } else {
                         throw new \Exception("Handler class [{$handler}] does not exist");
                     }
