@@ -3,6 +3,7 @@
 namespace Prettus\RequestLogger;
 
 use Illuminate\Contracts\Logging\Log;
+use Monolog\Formatter\JsonFormatter;
 
 /**
  * Class Logger
@@ -30,7 +31,10 @@ class Logger implements Log
 
                 foreach($handlers as $handler) {
                     if( class_exists($handler) ) {
-                        $this->monolog->pushHandler(app($handler));
+                        $stream = app($handler);
+                        $formatter = new JsonFormatter();
+                        $stream->setFormatter($formatter);
+                        $this->monolog->pushHandler($stream);
                         $this->monolog->pushProcessor(new Processors\MyProcessor());
                     } else {
                         throw new \Exception("Handler class [{$handler}] does not exist");
